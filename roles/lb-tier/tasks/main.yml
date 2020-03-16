@@ -1,2 +1,25 @@
 ---
-# tasks file for lb-tier
+# Tasks to install HAProxy package, copy the configuration to desired location and start the services
+- name: Install HAProxy Packages
+  yum:
+    name: "{{ loadbal }}"
+    state: latest
+
+- name: Enable HAProxy service to start at boot
+  service:
+    name: "{{ loadbal }}"
+    enabled: yes
+
+- name: Configure HAProxy to manage the load and route the trafic to app servers
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    mode: 0644
+  notify:
+    - restart_haproxy
+
+- name: Start HAProxy service 
+  service:
+    name: "{{ loadbal }}"
+    state: restarted
+...

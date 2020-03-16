@@ -1,2 +1,23 @@
 ---
-# tasks file for db-tier
+# Tasks for installing Postgresql and configuring.
+- name: Install postgres sql server
+  yum:
+    name: postgresql-server
+    state: latest
+
+- name: Check the Postgresql database directory is present or not 
+  command: postgresql-check-db-dir  {{ postgres_db_dir }}
+  register: check_db_output
+  changed_when: check_db_output == 1
+  ignore_errors: yes
+
+- name: Initilize postgres database if db is not initialized
+  shell: postgresql-setup initdb
+  when: check_db_output.rc != 0
+  
+- name: Start and enable Postgresql service
+  service:
+    name: postgresql
+    enabled: yes
+    state: started
+...

@@ -1,2 +1,27 @@
 ---
-# tasks file for app-tier
+# This playbook is to install and configure Tomcat on application servers
+- name: Install Tomcat application on application servers 
+  yum:
+    name: "{{ tomcat }}"
+    state: latest
+
+- name: Enable Tomcat service to start at boot
+  service:
+    name: "{{ tomcat }}"
+    enabled: yes
+
+- name: Create tomcat web root directory
+  file:
+    path: "{{ tomcat_web_root }}"
+    state: directory
+
+- name: Copy index.html to tomcat webroot directory using template
+  template:
+    src: index.html.j2
+    dest: "{{ tomcat_web_root }}/index.html"
+    mode: 0644
+
+- name: Restart Tomcat services
+  service:
+    name: "{{ tomcat }}"
+    state: restarted

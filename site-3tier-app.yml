@@ -1,4 +1,6 @@
-- hosts: workstation
+---
+- name: This play is for deploying 3 tier application
+  hosts: workstation
   gather_facts: true
   roles:
   - name: osp-facts
@@ -15,7 +17,7 @@
 
 # Setup application servers tier
 
-- name: setup app tier
+- name: setup appliation tier
   hosts: apps
   become: yes
   gather_facts: false
