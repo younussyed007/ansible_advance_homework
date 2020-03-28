@@ -1,12 +1,13 @@
-- name: Create app2 server instance
+- name: Create app2 server
   os_server:
     cloud: ospcloud
-    name: app2
+    state: present
+    name: app2 
     image: rhel-guest
-    meta: group=apps,deployment_name=QA
+    key_name: ansible_ssh
     flavor: m2.small
     security_groups: apps
-    key_name: ansible_ssh
+    meta: group=apps,deployment_name=QA
     wait: yes
     nics:
     - net-name: int_network
@@ -18,25 +19,19 @@
       cp /tmp/internal.repo /etc/yum.repos.d/internal.repo
   register: instanceip
 
-
-- name: Add floating IP to app2
+- name: Add floating IP for app2
   os_floating_ip:
     cloud: ospcloud
     state: present
-    reuse: yes
     server: app2
     network: ext_network
-    wait: true
-    timeout: 180
   register: instancefloatingip
 
-- name: Show "{{ instanceip }}" public IP
-  debug: var=instancefloatingip.floating_ip.floating_ip_address
-
-- name: Wait for app2 to be available
+- name: Wait for server app2 to be available
   wait_for:
     host: "{{ instancefloatingip.floating_ip.floating_ip_address }}"
     port: 22
     search_regex: OpenSSH
     timeout: 600
   delegate_to: "{{ inventory_hostname }}"
+

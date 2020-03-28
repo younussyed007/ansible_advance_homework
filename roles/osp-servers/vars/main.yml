@@ -2,38 +2,50 @@
 # vars file for osp.servers
 osp_servers:
   frontend:
+    cloud_name: ospcloud
     name: frontend
     state: present
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
+    in_net: int_network
+    ex_net: ext_network
     security_group: frontend
     meta:
       - { group: frontends, deployment_name: QA}
   app1:
+    cloud_name: ospcloud
     name: app1
     state: present
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
+    in_net: int_network
+    ex_net: ext_network
     security_group: apps
     meta:
       - { group: apps, deployment_name: QA}
   app2:
+    cloud_name: ospcloud
     name: app2
     state: present
     image: rhel-guest
     key_name: ansible_ssh
+    in_net: int_network
+    ex_net: ext_network
     flavor: m2.small
     security_group: apps
     meta:
       - { group: apps, deployment_name: QA}
   db:
+    cloud_name: ospcloud
     name: db
     state: present
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
+    in_net: int_network
+    ex_net: ext_network
     security_group: db
     meta:
       - { group: appdbs, deployment_name: QA}

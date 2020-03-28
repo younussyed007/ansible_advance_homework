@@ -10,9 +10,9 @@ ssh_cred_name: "Connect_to_workstation"
 user_cred_name: "cloud-user"
 user_cred_path: "/root/.ssh/openstack.pem"
 static_inventory_name: scm_inventory
+job_template_name_osp_instances: "Provision QA Env"
 instance_group_name: osp
 workflow_template_name: cicd_workflow
-job_template_name_osp_instances: "Provision QA Env"
 osp_instances_playbook: site-osp-instances.yml
 group_name: workstation
 host_name: workstation-{{osp_GUID}}.rhpds.opentlc.com

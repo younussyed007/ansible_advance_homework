@@ -1,4 +1,5 @@
-- include_tasks: tasks/frontend.yml
-- include_tasks: tasks/app1.yml
-- include_tasks: tasks/app2.yml
-- include_tasks: tasks/db.yml
+# tasks file for osp.server: Create server instances and attaches them a network and passes metadata to the instance
+- include_tasks: app1.yml
+- include_tasks: frontend.yml
+- include_tasks: app2.yml
+- include_tasks: db.yml
