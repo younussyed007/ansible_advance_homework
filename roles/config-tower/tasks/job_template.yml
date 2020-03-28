@@ -1,3 +1,7 @@
+- name: Create a new project
+  command: |
+    tower-cli project create --name "{{proj_name}}" --organization "{{org_name}}" --scm-type git --scm-url "https://github.com/younussyed007/ansible_advance_homework"
+
 - name: Job template for OSP Instances
   command: |
     tower-cli job_template create --name "{{job_template_name_osp_instances}}" --job-type run --inventory "{{static_inventory_name}}" --project "{{proj_name}}" --playbook "{{osp_instances_playbook}}" --credential "{{ssh_cred_name}}"

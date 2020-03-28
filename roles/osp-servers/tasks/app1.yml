@@ -3,9 +3,9 @@
     cloud: ospcloud
     name: app1
     image: rhel-guest
-    meta: group=apps,deployment_name=dev
+    meta: group=apps,deployment_name=QA
     flavor: m2.small
-    security_groups: app_servers 
+    security_groups: apps
     key_name: ansible_ssh
     wait: yes
     nics:
