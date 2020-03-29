@@ -4,3 +4,4 @@
   roles:
     - osp-setup
     - osp-servers
+- import_playbook: site-3tier-app.yml
