@@ -29,7 +29,7 @@
 
 - name: setup database tier
   become: yes
-  hosts: postgres
+  hosts: db
   roles:
     - {name: base-config, tags: base-config}
     - {name: db-tier, tags: [dbs, postgres]}
